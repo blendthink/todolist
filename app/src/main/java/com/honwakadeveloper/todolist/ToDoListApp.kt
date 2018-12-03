@@ -1,13 +1,13 @@
 package com.honwakadeveloper.todolist
 
 import android.app.Application
-import io.realm.Realm
+import com.honwakadeveloper.todolist.realm.DbManager
 
 class ToDoListApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        Realm.init(this)
+        DbManager.initRealm(this)
     }
 }
