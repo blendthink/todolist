@@ -1,4 +1,4 @@
-package com.honwakadeveloper.todolist
+package com.honwakadeveloper.todolist.main
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -6,8 +6,10 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
+import com.honwakadeveloper.todolist.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -24,12 +26,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+
+        val titleList = arrayListOf<String>()
+
+        for ( i in 1..100) titleList.add("$i 件目")
+
+        val recyclerAdapter = MainToDoListAdapter(titleList)
+
+        recyclerView.adapter = recyclerAdapter
     }
 
     override fun onBackPressed() {
